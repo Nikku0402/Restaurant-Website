@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Summary</title>
+  <link rel="stylesheet" href="css/menu.css">
+</head>
+<body>
+  <header class="wrapper light">
+    <h1>Order Summary</h1>
+  </header>
+  <section class="menu-section">
+    <h2>Your Selected Items</h2>
+    <ul id="order-summary"></ul>
+    <p><strong>Thank you for your order!</strong></p>
+    <a href="menu.html">Back to Menu</a>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const orderSummary = document.getElementById('order-summary');
+      const items = JSON.parse(localStorage.getItem('orderItems') || '[]');
+
+      if (items.length === 0) {
+        orderSummary.innerHTML = '<li>No items selected.</li>';
+      } else {
+        items.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          orderSummary.appendChild(li);
+        });
+      }
+
+      // Clear the stored items
+      localStorage.removeItem('orderItems');
+    });
+  </script>
+</body>
+</html>
